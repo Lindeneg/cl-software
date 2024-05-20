@@ -96,18 +96,19 @@
         e.preventDefault();
         const valid = contactFormEl.checkValidity();
         if (valid) {
-            const ctx = {
-                name: nameInput.value,
-                email: emailInput.value,
-                message: messageInput.value,
-                utc: Date.now(),
-            };
             disableContactButton();
             let success = true;
             try {
                 await fetch('https://christian.lindeneg.org/api/cl-software', {
                     method: 'POST',
-                    body: JSON.stringify(ctx),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: nameInput.value,
+                        email: emailInput.value,
+                        message: messageInput.value,
+                    }),
                 });
             } catch (err) {
                 success = false;
@@ -127,7 +128,7 @@
                 submitFeedbackEl.classList.add('hidden');
                 enableContactButton();
                 submitBtn.classList.remove('hidden');
-            }, 2500);
+            }, 5000);
         } else {
             contactFormEl.reportValidity();
         }
