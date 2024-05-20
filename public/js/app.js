@@ -27,17 +27,15 @@
     const submitFeedbackEl = document.getElementById('submit-feedback');
 
     const THEME = {
-        dark: {
+        light: {
             clsReplacer: ['dark', 'light'],
             imgReplacer: [heroDarkImgEl, heroLightImgEl],
             stroke: '#200E32',
-            to: 'light',
         },
-        light: {
+        dark: {
             clsReplacer: ['light', 'dark'],
             imgReplacer: [heroLightImgEl, heroDarkImgEl],
             stroke: '#FFFFFF',
-            to: 'dark',
         },
     };
 
@@ -47,11 +45,11 @@
 
     const getSavedTheme = () => {
         try {
-            return window.localStorage.getItem('theme') || 'light';
+            return window.localStorage.getItem('theme') || 'dark';
         } catch (err) {
             // silent catch
         }
-        return 'light';
+        return 'dark';
     };
 
     const setSavedTheme = (theme) => {
