@@ -127,7 +127,7 @@
                 submitFeedbackEl.classList.add('hidden');
                 enableContactButton();
                 submitBtn.classList.remove('hidden');
-            }, 5000);
+            }, 2500);
         } else {
             contactFormEl.reportValidity();
         }
