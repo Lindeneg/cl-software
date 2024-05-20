@@ -8,6 +8,7 @@
     </head>
     <body class="bg-white dark:bg-gray-900">
         <header
+            id="header"
             class="flex justify-between items-center bg-slate-200 text-gray-800 dark:bg-gray-800 dark:text-gray-400"
         >
             <a href="/" class="p-4 font-bold">CL Software</a>
@@ -15,7 +16,33 @@
                 <button id="switch-theme-btn" class="mode"></button>
             </div>
         </header>
-        <section class="text-gray-600 dark:text-gray-400 dark:bg-gray-900 body-font mb-72">
+        <div id="up-arrow-container" class="hide hidden md:block">
+            <!--#200E32-->
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path
+                        d="M7 16L9 16C11.2091 16 13 14.2091 13 12L13 7"
+                        stroke="#ffffff"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    ></path>
+                    <path
+                        d="M16 10L13 7L10 10"
+                        stroke="#ffffff"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    ></path>
+                </g>
+            </svg>
+        </div>
+        <section
+            id="hero-section"
+            class="text-gray-600 dark:text-gray-400 dark:bg-gray-900 body-font mb-72"
+        >
             <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
                 <div
                     class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center"
@@ -191,7 +218,7 @@
                         Let me know what I can help with and how I can reach you.
                     </p>
                 </div>
-                <div class="lg:w-1/2 md:w-2/3 mx-auto">
+                <form id="contact-form" class="lg:w-1/2 md:w-2/3 mx-auto">
                     <div class="flex flex-wrap -m-2">
                         <div class="p-2 w-1/2">
                             <div class="relative">
@@ -205,6 +232,7 @@
                                     id="name"
                                     name="name"
                                     class="w-full bg-gray-100 dark:bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-purple-500 focus:bg-gray-900 focus:ring-2 focus:ring-purple-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                    required
                                 />
                             </div>
                         </div>
@@ -220,6 +248,7 @@
                                     id="email"
                                     name="email"
                                     class="w-full bg-gray-100 dark:bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-purple-500 focus:bg-gray-900 focus:ring-2 focus:ring-purple-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                    required
                                 />
                             </div>
                         </div>
@@ -234,6 +263,7 @@
                                     id="message"
                                     name="message"
                                     class="w-full bg-gray-100 dark:bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-purple-500 focus:bg-gray-900 focus:ring-2 focus:ring-purple-900 h-32 text-base outline-none text-gray-100 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+                                    required
                                 ></textarea>
                             </div>
                         </div>
@@ -241,6 +271,7 @@
                             <button
                                 id="submit-btn"
                                 class="flex mx-auto text-white bg-purple-500 border-0 py-2 px-8 focus:outline-none hover:bg-purple-600 rounded text-lg"
+                                type="button"
                             >
                                 Submit
                             </button>
@@ -252,7 +283,7 @@
                             </p>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </section>
         <script src="/js/app.js"></script>

@@ -12,6 +12,15 @@
     const heroDarkImgEl = document.getElementById('hero-img-dark');
     const heroLightImgEl = document.getElementById('hero-img-light');
 
+    const contactFormEl = document.getElementById('contact-form');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const messageInput = document.getElementById('message');
+
+    const heroEl = document.getElementById('hero-section');
+    const headerEl = document.getElementById('header');
+    const upArrowEl = document.getElementById('up-arrow-container');
+
     const THEME = {
         dark: {
             clsReplacer: ['dark', 'light'],
@@ -59,18 +68,54 @@
         setSavedTheme(key);
     };
 
-    const onContactSubmission = () => {
-        console.log('submit message');
+    const onContactSubmission = (e) => {
+        e.preventDefault();
+        const valid = contactFormEl.checkValidity();
+        if (valid) {
+            const ctx = {
+                name: nameInput.value,
+                email: emailInput.value,
+                message: messageInput.value,
+            };
+            console.log(ctx);
+        } else {
+            contactFormEl.reportValidity();
+        }
     };
 
-    const initialize = () => {
+    const onScrollToTopIntersect = (ctx) => {
+        if (ctx.length <= 0) return;
+        if (ctx[0].isIntersecting) {
+            upArrowEl.classList.add('hide');
+        } else {
+            upArrowEl.classList.remove('hide');
+        }
+    };
+
+    const setupScrollIntersect = () => {
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 1.0,
+        };
+        const observer = new IntersectionObserver(onScrollToTopIntersect, options);
+        observer.observe(heroEl);
+    };
+
+    const setupListeners = () => {
+        upArrowEl.addEventListener('click', () => scrollIntoView(headerEl));
         switchThemeBtnEl.addEventListener('click', onSwitchTheme);
         submitBtn.addEventListener('click', onContactSubmission);
         learnMoreBtn.addEventListener('click', () => scrollIntoView(learnMoreEl));
         contactBtns.forEach((b) => {
             b.addEventListener('click', () => scrollIntoView(contactEl));
         });
+    };
+
+    const initialize = () => {
         setTheme(getSavedTheme());
+        setupListeners();
+        setupScrollIntersect();
     };
 
     initialize();

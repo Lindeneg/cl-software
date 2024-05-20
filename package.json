@@ -1,15 +1,15 @@
 {
-  "name": "website",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "scripts": {
-    "dev": "npx -y concurrently \"yarn start:dev\" \"yarn build:css\"",
-    "start:dev": "yarn cl-live-server -R ./public",
-    "build:css": "yarn tailwindcss -i ./styles.css -o ./public/styles.css --watch"
-  },
-  "devDependencies": {
-    "@cl-live-server/cli": "^0.0.3",
-    "tailwindcss": "^3.4.3"
-  }
+    "name": "website",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "dev": "npx -y concurrently \"yarn start:dev\" \"yarn build:css --watch\"",
+        "start:dev": "yarn cl-live-server -R ./public",
+        "build:css": "yarn tailwindcss -i ./styles.css -o ./public/css/styles.css"
+    },
+    "devDependencies": {
+        "@cl-live-server/cli": "^0.0.3",
+        "tailwindcss": "^3.4.3"
+    }
 }

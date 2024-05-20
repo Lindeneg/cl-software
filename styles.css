@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+#up-arrow-container {
+    width: 64px;
+    height: 64px;
+    position: fixed;
+    right: 0;
+    bottom: 25px;
+    cursor: pointer;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.25s ease-in-out;
+    -moz-transition: opacity 0.25s ease-in-out;
+    -webkit-transition: opacity 0.25s ease-in-out;
+}
+
+#up-arrow-container.hide {
+    opacity: 0;
+}
+
 .mode {
     background-color: hsla(0, 6%, 48%, 0.385);
     border-radius: 30px;
