@@ -47,11 +47,11 @@
 
     const getSavedTheme = () => {
         try {
-            return window.localStorage.getItem('theme') || 'dark';
+            return window.localStorage.getItem('theme') || 'light';
         } catch (err) {
             // silent catch
         }
-        return 'dark';
+        return 'light';
     };
 
     const setSavedTheme = (theme) => {
