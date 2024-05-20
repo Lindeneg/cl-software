@@ -20,16 +20,19 @@
     const heroEl = document.getElementById('hero-section');
     const headerEl = document.getElementById('header');
     const upArrowEl = document.getElementById('up-arrow-container');
+    const upArrowPaths = document.querySelectorAll('#up-arrow-path');
 
     const THEME = {
         dark: {
             clsReplacer: ['dark', 'light'],
             imgReplacer: [heroDarkImgEl, heroLightImgEl],
+            stroke: '#200E32',
             to: 'light',
         },
         light: {
             clsReplacer: ['light', 'dark'],
             imgReplacer: [heroLightImgEl, heroDarkImgEl],
+            stroke: '#FFFFFF',
             to: 'dark',
         },
     };
@@ -60,6 +63,9 @@
         htmlEl.classList.replace(...theme.clsReplacer);
         theme.imgReplacer[0].classList.add('hidden');
         theme.imgReplacer[1].classList.remove('hidden');
+        upArrowPaths.forEach((e) => {
+            e.setAttribute('stroke', theme.stroke);
+        });
     };
 
     const onSwitchTheme = () => {
@@ -68,7 +74,7 @@
         setSavedTheme(key);
     };
 
-    const onContactSubmission = (e) => {
+    const onContactSubmission = async (e) => {
         e.preventDefault();
         const valid = contactFormEl.checkValidity();
         if (valid) {
@@ -76,8 +82,14 @@
                 name: nameInput.value,
                 email: emailInput.value,
                 message: messageInput.value,
+                utc: Date.now(),
             };
-            console.log(ctx);
+            // start button spinner
+            await fetch('https://christian.lindeneg.org/api/cl-software', {
+                method: 'POST',
+                body: JSON.stringify(ctx),
+            });
+            // end button spinner
         } else {
             contactFormEl.reportValidity();
         }
