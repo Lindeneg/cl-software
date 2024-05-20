@@ -22,6 +22,10 @@
     const upArrowEl = document.getElementById('up-arrow-container');
     const upArrowPaths = document.querySelectorAll('#up-arrow-path');
 
+    const spinnerSvg = document.getElementById('spinner');
+    const contactBtnText = document.getElementById('contact-text');
+    const submitFeedbackEl = document.getElementById('submit-feedback');
+
     const THEME = {
         dark: {
             clsReplacer: ['dark', 'light'],
@@ -74,6 +78,20 @@
         setSavedTheme(key);
     };
 
+    const disableContactButton = () => {
+        submitBtn.classList.replace('cursor-pointer', 'cursor-not-allowed');
+        submitBtn.setAttribute('disabled', true);
+        spinnerSvg.classList.remove('hidden');
+        contactBtnText.innerText = 'Sending...';
+    };
+
+    const enableContactButton = () => {
+        submitBtn.classList.replace('cursor-not-allowed', 'cursor-pointer');
+        submitBtn.removeAttribute('disabled');
+        spinnerSvg.classList.add('hidden');
+        contactBtnText.innerText = 'Send Message';
+    };
+
     const onContactSubmission = async (e) => {
         e.preventDefault();
         const valid = contactFormEl.checkValidity();
@@ -84,12 +102,32 @@
                 message: messageInput.value,
                 utc: Date.now(),
             };
-            // start button spinner
-            await fetch('https://christian.lindeneg.org/api/cl-software', {
-                method: 'POST',
-                body: JSON.stringify(ctx),
-            });
-            // end button spinner
+            disableContactButton();
+            let success = true;
+            try {
+                await fetch('https://christian.lindeneg.org/api/cl-software', {
+                    method: 'POST',
+                    body: JSON.stringify(ctx),
+                });
+            } catch (err) {
+                success = false;
+            }
+            submitBtn.classList.add('hidden');
+            if (success) {
+                submitFeedbackEl.innerText = "Message received! I'll return ASAP.";
+                submitFeedbackEl.classList.remove('text-red-500');
+                submitFeedbackEl.classList.add('text-green-500');
+            } else {
+                submitFeedbackEl.innerText = 'An error occurred. Please try again later.';
+                submitFeedbackEl.classList.remove('text-green-500');
+                submitFeedbackEl.classList.add('text-red-500');
+            }
+            submitFeedbackEl.classList.remove('hidden');
+            setTimeout(() => {
+                submitFeedbackEl.classList.add('hidden');
+                enableContactButton();
+                submitBtn.classList.remove('hidden');
+            }, 5000);
         } else {
             contactFormEl.reportValidity();
         }
