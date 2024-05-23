@@ -6,7 +6,7 @@
 
     const learnMoreBtn = document.getElementById("learn-more-btn");
     const submitBtn = document.getElementById("submit-btn");
-    const contactBtns = document.querySelectorAll("#contact-btn");
+    const contactBtns = document.querySelectorAll(".contact-btn");
 
     const switchThemeBtnEl = document.getElementById("switch-theme-btn");
     const heroDarkImgEl = document.getElementById("hero-img-dark");
