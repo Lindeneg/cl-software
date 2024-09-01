@@ -21,7 +21,7 @@
     /** @param {HTMLElement} el */
     const disableEl = (...el) => {
         el.forEach((e) => {
-            e.setAttribute('disabled', 'true');
+            e.setAttribute("disabled", "true");
         });
     };
     window.clCommon.disableEl = disableEl;
@@ -29,7 +29,7 @@
     /** @param {HTMLElement} el */
     const enableEl = (...el) => {
         el.forEach((e) => {
-            e.removeAttribute('disabled');
+            e.removeAttribute("disabled");
         });
     };
     window.clCommon.enableEl = enableEl;
@@ -38,7 +38,7 @@
     const disableBtn = (...btns) => {
         btns.forEach((btn) => {
             disableEl(btn);
-            btn.classList.add('pure-button-disabled');
+            btn.classList.add("pure-button-disabled");
         });
     };
     window.clCommon.disableBtn = disableBtn;
@@ -47,7 +47,7 @@
     const enableBtn = (...btns) => {
         btns.forEach((btn) => {
             enableEl(btn);
-            btn.classList.remove('pure-button-disabled');
+            btn.classList.remove("pure-button-disabled");
         });
     };
     window.clCommon.enableBtn = enableBtn;
@@ -55,7 +55,7 @@
     /** @param {HTMLElement} el */
     const hideEl = (...el) => {
         el.forEach((e) => {
-            e.classList.add('hidden');
+            e.classList.add("hidden");
         });
     };
     window.clCommon.hideEl = hideEl;
@@ -63,7 +63,7 @@
     /** @param {HTMLElement} el */
     const showEl = (...el) => {
         el.forEach((e) => {
-            e.classList.remove('hidden');
+            e.classList.remove("hidden");
         });
     };
     window.clCommon.showEl = showEl;
@@ -91,7 +91,11 @@
         /** @type {Map<HTMLButtonElement, boolean>} */
         const enabledMap = new Map();
         btns.forEach((btn) => {
-            enabledMap.set(btn, !btn.hasAttribute('disabled') && !btn.classList.contains('pure-button-disabled'));
+            enabledMap.set(
+                btn,
+                !btn.hasAttribute("disabled") &&
+                    !btn.classList.contains("pure-button-disabled")
+            );
             disableEl(btn);
         });
         return {
@@ -111,7 +115,7 @@
     const getNameFromId = (id, obj) => {
         const found = obj.find((e) => e.id === id);
         if (found) return found.name;
-        return '';
+        return "";
     };
     window.clCommon.getNameFromId = getNameFromId;
 
@@ -153,8 +157,10 @@
      * @param {string} ended
      * @returns {string} */
     const durationInMins = (started, ended) => {
-        if (!started || !ended) return '-';
-        return `${Math.ceil((new Date(ended) - new Date(started)) / 1000 / 60)} mins`;
+        if (!started || !ended) return "-";
+        return `${Math.ceil(
+            (new Date(ended) - new Date(started)) / 1000 / 60
+        )} mins`;
     };
     window.clCommon.durationInMins = durationInMins;
 
@@ -193,7 +199,7 @@
             el[key] = value;
         });
         if (classes.length > 0) {
-            if (typeof classes === 'string') {
+            if (typeof classes === "string") {
                 el.classList.add(classes);
             } else {
                 el.classList.add(...classes);
@@ -208,7 +214,7 @@
      * @param {string[] | string} [classes = []]
      * @returns {HTMLDivElement} */
     const div = (props = {}, classes = []) => {
-        return any('div', props, classes);
+        return any("div", props, classes);
     };
     window.clEl.div = div;
 
@@ -217,8 +223,8 @@
      * @param {EventListener | null} [onClick = null]
      * @param {string} [event = "click"]
      * @returns {HTMLElement} */
-    const withListener = (el, onClick, event = 'click') => {
-        if (!el || typeof onClick !== 'function') return el;
+    const withListener = (el, onClick, event = "click") => {
+        if (!el || typeof onClick !== "function") return el;
         el.addEventListener(event, onClick);
         return el;
     };
@@ -230,8 +236,16 @@
      * @param {EventListener | null} [onClick = null]
      * @param {string} [as = "button"]
      * @returns {HTMLButtonElement} */
-    const button = (props = {}, classes = [], onClick = null, as = 'button') => {
-        const btn = any(as, { type: 'button', ...props }, ['pure-button', ...ensureArray(classes)]);
+    const button = (
+        props = {},
+        classes = [],
+        onClick = null,
+        as = "button"
+    ) => {
+        const btn = any(as, { type: "button", ...props }, [
+            "pure-button",
+            ...ensureArray(classes),
+        ]);
         return withListener(btn, onClick);
     };
     window.clEl.button = button;
@@ -242,8 +256,11 @@
      * @param {EventListener | null} [onChange = null]
      * @returns {HTMLInputElement} */
     const input = (props = {}, classes = [], onChange = null) => {
-        const inp = any('input', props, ['pure-input', ...ensureArray(classes)]);
-        return withListener(inp, onChange, 'change');
+        const inp = any("input", props, [
+            "pure-input",
+            ...ensureArray(classes),
+        ]);
+        return withListener(inp, onChange, "change");
     };
     window.clEl.input = input;
 
@@ -255,7 +272,11 @@
      * @returns {HTMLSelectElement} */
     const select = (onChange, options = [], props = {}, classes = []) => {
         /** @type {HTMLSelectElement} */
-        const sel = withListener(any('select', props, ['pure-select', ...ensureArray(classes)]), onChange, 'change');
+        const sel = withListener(
+            any("select", props, ["pure-select", ...ensureArray(classes)]),
+            onChange,
+            "change"
+        );
         options.forEach((option) => {
             sel.options.add(option);
         });
@@ -270,7 +291,7 @@
      * @param {string[] | string} [classes = []]
      * @returns {HTMLOptionElement} */
     const option = (value, displayName, props = {}, classes = []) => {
-        const opt = any('option', props, classes);
+        const opt = any("option", props, classes);
         opt.value = value;
         opt.innerText = displayName;
         return opt;
@@ -282,7 +303,7 @@
      * @param {string[] | string} [classes = []]
      * @returns {HTMLOptionElement} */
     const hr = (props = {}, classes = []) => {
-        return any('hr', props, classes);
+        return any("hr", props, classes);
     };
     window.clEl.hr = hr;
 
@@ -296,11 +317,11 @@
         window.clHttp = {};
     }
 
-    const unknownError = new Error('Unknown Error');
+    const unknownError = new Error("Unknown Error");
     window.clHttp.unknownError = unknownError;
 
-    const errorEl = () => document.getElementById('error-div');
-    const spinnerEl = () => document.getElementById('spinner');
+    const errorEl = () => document.getElementById("error-div");
+    const spinnerEl = () => document.getElementById("spinner");
 
     /** @typedef {Record<string, unknown> | null} Data */
 
@@ -345,7 +366,12 @@
             error = [error];
         }
         error.unshift(message);
-        append(el, ...error.map((err) => any('p', { innerText: err }, ['request-error-message'])));
+        append(
+            el,
+            ...error.map((err) =>
+                any("p", { innerText: err }, ["request-error-message"])
+            )
+        );
     };
     window.clHttp.setErrorEx = setErrorEx;
 
@@ -357,7 +383,7 @@
     /** @param {HTMLElement} el */
     const clearErrorEx = (el) => {
         if (!el) return;
-        el.innerHTML = '';
+        el.innerHTML = "";
         hideEl(el);
     };
     window.clHttp.clearErrorEx = clearErrorEx;
@@ -373,16 +399,23 @@
      * @param {HTMLElement} errDiv
      * @returns {Promise<{response: Response, err: HttpError | null}>}
      * */
-    const sendRequest = async (path, method, headers = null, body = null, errorTimeout = 10, errDiv = errorEl()) => {
+    const sendRequest = async (
+        path,
+        method,
+        headers = null,
+        body = null,
+        errorTimeout = 10,
+        errDiv = errorEl()
+    ) => {
         showEl(spinnerEl());
         const opts = { method };
-        if (method !== 'GET' && body) {
+        if (method !== "GET" && body) {
             opts.body = JSON.stringify(body);
         }
         if (headers) {
             opts.headers = headers;
         }
-        const response = await fetch('/api' + path, opts);
+        const response = await fetch("/api" + path, opts);
         if (response.ok) {
             hideEl(spinnerEl());
             return { response, err: null };
@@ -406,7 +439,14 @@
      * @returns {Promise<{data: Data, response: Response, err: HttpError | null}>}
      * */
     const getJson = async (path, errorTimeout = 10, errDiv = errorEl()) => {
-        const result = await sendRequest(path, 'GET', null, null, errorTimeout, errDiv);
+        const result = await sendRequest(
+            path,
+            "GET",
+            null,
+            null,
+            errorTimeout,
+            errDiv
+        );
         if (result.err || !result.response.ok) return result;
         return { ...result, data: await getData(result.response) };
     };
@@ -419,11 +459,16 @@
      * @param {HTMLElement} errDiv
      * @returns {Promise<{data: Data, response: Response, err: HttpError | null}>}
      * */
-    const postJson = async (path, body, errorTimeout = 10, errDiv = errorEl()) => {
+    const postJson = async (
+        path,
+        body,
+        errorTimeout = 10,
+        errDiv = errorEl()
+    ) => {
         const result = await sendRequest(
             path,
-            'POST',
-            { 'Content-Type': 'application/json' },
+            "POST",
+            { "Content-Type": "application/json" },
             body,
             errorTimeout,
             errDiv
@@ -440,7 +485,14 @@
      * @returns {Promise<{data: Data, response: Response, err: HttpError | null}>}
      * */
     const deleteReq = async (path, errorTimeout = 10, errDiv = errorEl()) => {
-        const result = await sendRequest(path, 'DELETE', null, null, errorTimeout, errDiv);
+        const result = await sendRequest(
+            path,
+            "DELETE",
+            null,
+            null,
+            errorTimeout,
+            errDiv
+        );
         if (result.err || !result.response.ok) return result;
         return { ...result, data: await getData(result.response) };
     };
@@ -474,8 +526,12 @@
          * @property {() => void} onCancel
          */
 
-        const modalBackdrop = document.getElementById(wrapperId ?? 'modal-backdrop');
-        const modalWrapper = document.getElementById(backdropId ?? 'modal-wrapper');
+        const modalBackdrop = document.getElementById(
+            wrapperId ?? "modal-backdrop"
+        );
+        const modalWrapper = document.getElementById(
+            backdropId ?? "modal-wrapper"
+        );
         /** @type {ModalQueueItem[]} */
         const modalQueue = [];
         /** @type {ModalQueueItem | null} */
@@ -493,7 +549,7 @@
             } else {
                 isModalVisible = false;
                 hideEl(modalBackdrop, modalWrapper);
-                if (typeof modalCleanup === 'function') {
+                if (typeof modalCleanup === "function") {
                     modalCleanup();
                     modalCleanup = null;
                 }
@@ -506,7 +562,7 @@
 
         const renderModalItem = () => {
             if (!modalItem) return;
-            const modal = div({}, 'modal');
+            const modal = div({}, "modal");
             if (modalItem.contents instanceof HTMLElement) {
                 modal.appendChild(modalItem.contents);
             } else {
@@ -516,16 +572,16 @@
 
             const actions = div(
                 {
-                    ...(modalItem.noConfirm ? { style: 'padding:1rem;' } : {}),
+                    ...(modalItem.noConfirm ? { style: "padding:1rem;" } : {}),
                 },
-                modalItem.noConfirm ? '' : 'modal-actions'
+                modalItem.noConfirm ? "" : "modal-actions"
             );
 
             let confirmButton = null;
             if (!modalItem.noConfirm) {
                 confirmButton = button(
-                    { innerText: modalItem.confirmName || 'Confirm' },
-                    'primary',
+                    { innerText: modalItem.confirmName || "Confirm" },
+                    "primary",
                     modalItem.onConfirm
                 );
                 actions.appendChild(confirmButton);
@@ -533,10 +589,10 @@
 
             const cancelButton = button(
                 {
-                    innerText: modalItem.cancelName || 'Cancel',
-                    ...(modalItem.noConfirm ? { style: 'width:100%;' } : {}),
+                    innerText: modalItem.cancelName || "Cancel",
+                    ...(modalItem.noConfirm ? { style: "width:100%;" } : {}),
                 },
-                'secondary',
+                "secondary",
                 modalItem.onCancel
             );
 
@@ -545,13 +601,19 @@
             modalWrapper.appendChild(modal);
 
             const rect = modal.getBoundingClientRect();
-            modalWrapper.setAttribute('style', `top: calc(50% - (${rect.height}px / 2));left: 50%;`);
+            modalWrapper.setAttribute(
+                "style",
+                `top: calc(50% - (${rect.height}px / 2));left: 50%;`
+            );
 
             modalCleanup = () => {
                 modalItem.cleanup();
-                modalWrapper.style = 'top:50%; left:50%;';
-                confirmButton?.removeEventListener('click', modalItem.onConfirm);
-                cancelButton.removeEventListener('click', modalItem.onCancel);
+                modalWrapper.style = "top:50%; left:50%;";
+                confirmButton?.removeEventListener(
+                    "click",
+                    modalItem.onConfirm
+                );
+                cancelButton.removeEventListener("click", modalItem.onCancel);
                 modal.remove();
             };
         };
@@ -564,19 +626,19 @@
             setModalVisible(true);
         };
 
-        modalBackdrop.addEventListener('click', () => {
+        modalBackdrop.addEventListener("click", () => {
             if (!isModalVisible || !modalItem?.onCancel) return;
             modalItem.onCancel();
         });
 
         if (withKeyListener) {
-            document.addEventListener('keyup', ({ key }) => {
+            document.addEventListener("keyup", ({ key }) => {
                 if (!modalItem) return;
                 switch (key) {
-                    case 'Enter':
+                    case "Enter":
                         modalItem.onConfirm();
                         break;
-                    case 'Escape':
+                    case "Escape":
                         modalItem.onCancel();
                         break;
                 }
@@ -590,20 +652,20 @@
                     ...item,
                     onConfirm: async () => {
                         let show = false;
-                        if (typeof item.onConfirm === 'function') {
+                        if (typeof item.onConfirm === "function") {
                             show = await item.onConfirm();
                         }
                         if (!show) setModalVisible(show);
                         return show;
                     },
                     onCancel: () => {
-                        if (typeof item.onCancel === 'function') {
+                        if (typeof item.onCancel === "function") {
                             item.onCancel();
                         }
                         setModalVisible(false);
                     },
                     cleanup: () => {
-                        if (typeof item.cleanup === 'function') {
+                        if (typeof item.cleanup === "function") {
                             item.cleanup();
                         }
                     },
@@ -684,13 +746,13 @@
         };
 
         const getLimit = () => {
-            const l = state.search.get('limit');
+            const l = state.search.get("limit");
             if (l === null) return defaultLimit;
             return Number(l);
         };
 
         const getOffset = () => {
-            const l = state.search.get('offset');
+            const l = state.search.get("offset");
             if (l === null) return defaultOffset;
             return Number(l);
         };
@@ -700,15 +762,23 @@
          * @param {string} value */
         const setSearchSoft = (key, value) => {
             state.search.set(key, value);
-            window.history.replaceState(null, null, '?' + state.search.toString());
+            window.history.replaceState(
+                null,
+                null,
+                "?" + state.search.toString()
+            );
         };
 
-        setSearchSoft('limit', getLimit());
-        setSearchSoft('offset', getOffset());
+        setSearchSoft("limit", getLimit());
+        setSearchSoft("offset", getOffset());
 
         const page = (() => {
-            const currentPage = document.getElementById(currentPageId ?? 'current-page');
-            const maxPage = Number(document.getElementById(maxPageId ?? 'max-page').innerText);
+            const currentPage = document.getElementById(
+                currentPageId ?? "current-page"
+            );
+            const maxPage = Number(
+                document.getElementById(maxPageId ?? "max-page").innerText
+            );
             const current = () => Number(currentPage.innerText);
             const max = () => current() === maxPage;
             const min = () => current() === 1;
@@ -730,15 +800,17 @@
         })();
 
         /** @type {HTMLButtonElement} */
-        const prevBtn = document.getElementById(prevId ?? 'previous-btn');
+        const prevBtn = document.getElementById(prevId ?? "previous-btn");
         /** @type {HTMLButtonElement} */
-        const nextBtn = document.getElementById(nextId ?? 'next-btn');
+        const nextBtn = document.getElementById(nextId ?? "next-btn");
         /** @type {HTMLTableElement} */
         const root = document.getElementById(id);
         /** @type {HTMLTableSectionElement} */
-        const body = root.getElementsByTagName('tbody')[0];
+        const body = root.getElementsByTagName("tbody")[0];
         /** @type {string[]} */
-        const cols = [...root.querySelectorAll('th')].map((e) => e.innerText.toLowerCase());
+        const cols = [...root.querySelectorAll("th")].map((e) =>
+            e.innerText.toLowerCase()
+        );
         /** @type {Row | null} */
         let selectedRow = null;
 
@@ -758,13 +830,16 @@
             return {
                 el: tr,
                 col,
-                val: (name) => col(name).innerText ?? '',
-                data: (name, item) => (name ? col(name).dataset[item] ?? '' : tr.dataset[item] ?? ''),
+                val: (name) => col(name).innerText ?? "",
+                data: (name, item) =>
+                    name
+                        ? col(name).dataset[item] ?? ""
+                        : tr.dataset[item] ?? "",
                 setActive: () => {
-                    tr.dataset.isActive = '1';
+                    tr.dataset.isActive = "1";
                 },
                 setInactive: () => {
-                    tr.dataset.isActive = '0';
+                    tr.dataset.isActive = "0";
                 },
                 state: () => {
                     const id = strToIntId(tr.id);
@@ -776,7 +851,8 @@
         };
 
         /** @type {() => Row[]} */
-        const rows = () => [...body.getElementsByTagName('tr')].map((el) => createRow(el));
+        const rows = () =>
+            [...body.getElementsByTagName("tr")].map((el) => createRow(el));
 
         const padRows = () => {
             const r = rows();
@@ -786,15 +862,17 @@
             for (let i = 0; i < diff; i++) {
                 const row = createRow(
                     append(
-                        any('tr', {}, onClick ? 'clickable-row' : []),
+                        any("tr", {}, onClick ? "clickable-row" : []),
                         ...cols.map((col) => {
-                            const td = any('td');
+                            const td = any("td");
                             td.dataset.name = col;
                             return td;
                         })
                     )
                 );
-                body.appendChild(onClick ? withListener(row.el, () => onClick(row)) : row.el);
+                body.appendChild(
+                    onClick ? withListener(row.el, () => onClick(row)) : row.el
+                );
             }
         };
 
@@ -808,7 +886,7 @@
 
         /** @returns {Row | null} */
         const active = () => {
-            return rows().find((r) => r.data(null, 'isActive') === '1') ?? null;
+            return rows().find((r) => r.data(null, "isActive") === "1") ?? null;
         };
 
         /** @param {Row | null} [row = null] */
@@ -816,37 +894,37 @@
             const activeRow = row ?? active();
             if (!activeRow) return;
             selectedRow = null;
-            activeRow.el.classList.add('selected-row');
+            activeRow.el.classList.add("selected-row");
             return rows().forEach((r) => {
                 if (r.el.id === activeRow.el.id) return;
-                r.el.classList.remove('selected-row');
+                r.el.classList.remove("selected-row");
             });
         };
 
         /** @param {Row} row */
         const highlight = (row) => {
-            if (row.data(null, 'isActive') === '1') {
+            if (row.data(null, "isActive") === "1") {
                 return highlightActiveSession(row);
             }
             rows().forEach((r) => {
                 if (r.el.id === row.el.id) {
-                    if (r.el.classList.contains('selected-row')) {
+                    if (r.el.classList.contains("selected-row")) {
                         selectedRow = null;
-                        r.el.classList.remove('selected-row');
+                        r.el.classList.remove("selected-row");
                         return highlightActiveSession();
                     } else {
-                        r.el.classList.add('selected-row');
+                        r.el.classList.add("selected-row");
                         selectedRow = r;
                         return;
                     }
                 }
-                r.el.classList.remove('selected-row');
+                r.el.classList.remove("selected-row");
             });
         };
 
         const removeHighlight = () => {
             selectedRow = null;
-            rows().forEach((r) => r.el.classList.remove('selected-row'));
+            rows().forEach((r) => r.el.classList.remove("selected-row"));
         };
 
         /**
@@ -856,7 +934,7 @@
          * @returns {string | HTMLElement} */
         const handleTransform = (col, data, row) => {
             const val = data[col];
-            if (typeof transform === 'function') {
+            if (typeof transform === "function") {
                 return transform(ctx, col, val, row, data);
             }
             return val;
@@ -872,20 +950,20 @@
                 cols.forEach((col) => {
                     const cell = row.col(col);
                     const tranformed = handleTransform(col, entry, row);
-                    cell.innerHTML = '';
+                    cell.innerHTML = "";
                     if (tranformed instanceof HTMLElement) {
                         cell.appendChild(tranformed);
                     } else {
                         cell.innerText = tranformed;
                     }
-                    cell.id = cellId(row.val('id'), col);
+                    cell.id = cellId(row.val("id"), col);
                 });
-                if (typeof onRender === 'function') {
+                if (typeof onRender === "function") {
                     onRender(ctx, entry, row);
                 }
-                row.el.id = rowId(row.val('id'));
+                row.el.id = rowId(row.val("id"));
             });
-            if (typeof afterRender === 'function') {
+            if (typeof afterRender === "function") {
                 afterRender(ctx, data);
             }
         };
@@ -900,31 +978,41 @@
             const offset = getOffset();
             const normalizer = active() ? 1 : 0;
             setSearchSoft(
-                'offset',
-                pageKey === 'min' ? Math.max(offset - (limit - normalizer), 0) : limit + offset - normalizer
+                "offset",
+                pageKey === "min"
+                    ? Math.max(offset - (limit - normalizer), 0)
+                    : limit + offset - normalizer
             );
-            page[pageKey === 'min' ? 'dec' : 'inc']();
+            page[pageKey === "min" ? "dec" : "inc"]();
             if (page[pageKey]()) disableBtn(btn);
-            enableElIf(!page[pageKey === 'min' ? 'max' : 'min'](), otherBtn);
+            enableElIf(!page[pageKey === "min" ? "max" : "min"](), otherBtn);
             const currentPage = page.current();
             if (!state.data[currentPage]) {
-                state.data[currentPage] = await onFetch(state.search.toString());
+                state.data[currentPage] = await onFetch(
+                    state.search.toString()
+                );
             }
             renderCurrentPage();
         };
 
-        const pageSizeSelect = document.getElementById(sizeId ?? 'size-select');
-        pageSizeSelect.addEventListener('change', ({ target }) => {
-            state.search.set('limit', target.value);
-            state.search.set('offset', 0);
+        const pageSizeSelect = document.getElementById(sizeId ?? "size-select");
+        pageSizeSelect.addEventListener("change", ({ target }) => {
+            state.search.set("limit", target.value);
+            state.search.set("offset", 0);
             window.location.search = state.search.toString();
         });
 
-        prevBtn.addEventListener('click', onPageChangeClick.bind(null, 'min', prevBtn, nextBtn));
-        nextBtn.addEventListener('click', onPageChangeClick.bind(null, 'max', nextBtn, prevBtn));
+        prevBtn.addEventListener(
+            "click",
+            onPageChangeClick.bind(null, "min", prevBtn, nextBtn)
+        );
+        nextBtn.addEventListener(
+            "click",
+            onPageChangeClick.bind(null, "max", nextBtn, prevBtn)
+        );
 
-        const hasClickListener = typeof onClick === 'function';
-        const hasInitialize = typeof onInitialize === 'function';
+        const hasClickListener = typeof onClick === "function";
+        const hasInitialize = typeof onInitialize === "function";
 
         const ctx = {
             state,
@@ -951,11 +1039,12 @@
 
         state.data[page.current()] = rows().map((row) => {
             if (hasClickListener) {
-                row.el.addEventListener('click', () => onClick(row));
+                row.el.addEventListener("click", () => onClick(row));
             }
             const initial = hasInitialize ? onInitialize(ctx, row) : {};
             return cols.reduce((acc, col) => {
-                if (col === 'id') {
+                if (typeof acc[col] !== "undefined") return acc;
+                if (col === "id") {
                     acc[col] = Number(row.val(col));
                 } else {
                     acc[col] = row.val(col);
