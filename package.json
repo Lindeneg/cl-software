@@ -7,14 +7,17 @@
         "start": "node ./index.mjs",
         "dev": "concurrently \"yarn start:dev\" \"yarn build:css --watch\"",
         "start:dev": "nodemon -e js,mjs,css,html,sql ./index.mjs",
-        "build:css": "tailwindcss -c ./tailwind.config.mjs -i ./styles.css -o ./public/css/styles.css"
+        "build:css": "tailwindcss -c ./tailwind.config.mjs -i ./styles.css -o ./public/css/styles.css",
+        "minify:common": "terser ./public/js/shared/common.js -o ./public/js/shared/common.min.js"
     },
     "devDependencies": {
         "concurrently": "^8.2.2",
         "nodemon": "^3.1.4",
-        "tailwindcss": "^3.4.3"
+        "tailwindcss": "^3.4.3",
+        "terser": "^5.31.6"
     },
     "dependencies": {
+        "compression": "^1.7.4",
         "express": "^4.19.2"
     },
     "resolutions": {
