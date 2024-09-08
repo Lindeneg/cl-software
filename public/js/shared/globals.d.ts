@@ -21,6 +21,7 @@ export interface ClCommon {
     strToIntId: (str: string) => Nullable<number>;
     strToUser: (str: string) => Nullable<{ id: number; name: string }>;
     durationInMins: (started: string, ended: string) => string;
+    trim: (str: string) => string;
 }
 
 export interface ClEl {

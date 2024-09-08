@@ -45,7 +45,9 @@
     const disableBtn = (...btns) => {
         btns.forEach((btn) => {
             disableEl(btn);
-            btn.classList.add("pure-button-disabled");
+            if (btn.tagName === "BUTTON") {
+                btn.classList.add("pure-button-disabled");
+            }
         });
     };
     window.clCommon.disableBtn = disableBtn;
@@ -54,7 +56,9 @@
     const enableBtn = (...btns) => {
         btns.forEach((btn) => {
             enableEl(btn);
-            btn.classList.remove("pure-button-disabled");
+            if (btn.tagName === "BUTTON") {
+                btn.classList.remove("pure-button-disabled");
+            }
         });
     };
     window.clCommon.enableBtn = enableBtn;
@@ -155,6 +159,10 @@
         )} mins`;
     };
     window.clCommon.durationInMins = durationInMins;
+
+    /** @type {Window["clCommon"]["trim"]} */
+    const trim = (str) => str.replaceAll("\n", "").trim();
+    window.clCommon.trim = trim;
 
     ////////////////////////////
     ////////////////////////////
