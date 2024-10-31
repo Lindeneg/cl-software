@@ -33,15 +33,6 @@
         <link rel="canonical" href="https://www.lindeneg.org" />
         <link rel="icon" href="https://www.lindeneg.org/favicon.ico" />
         <link href="./css/styles.css" rel="stylesheet" />
-        <style>
-            .no-new-contract {
-                width: 100%;
-                background-color: darkred;
-                color: #eee;
-                text-align: center;
-                padding: 1rem;
-            }
-        </style>
     </head>
     <body class="bg-white dark:bg-gray-900">
         <header
@@ -58,7 +49,9 @@
                 ></button>
             </div>
         </header>
-        <div class="no-new-contract">
+        <div
+            class="no-new-contract bg-red-600 text-white dark:bg-red-900 dark:text-gray-200"
+        >
             Currently <b>not</b> accepting new contracts.
         </div>
         <div id="up-arrow-container" class="hide hidden md:block">
@@ -350,9 +343,6 @@
                                     required
                                 ></textarea>
                             </div>
-                        </div>
-                        <div class="no-new-contract">
-                            Currently <b>not</b> accepting new contracts.
                         </div>
                         <div class="p-2 w-full">
                             <p
